@@ -6,20 +6,16 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { ApiConfigModal } from './components/ApiConfigModal';
 import { HomePage } from './pages/HomePage';
 import { DiagnosePage } from './pages/DiagnosePage';
 import { DiseasesPage } from './pages/DiseasesPage';
 import { HowItWorksPage } from './pages/HowItWorksPage';
 import { AboutPage } from './pages/AboutPage';
-import { checkApiHealth } from './services/api';
 
 type NavTab = 'home' | 'diagnose' | 'diseases' | 'how-it-works' | 'about';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('home');
-  const [isApiModalOpen, setIsApiModalOpen] = useState(false);
-  const [backendOnline, setBackendOnline] = useState<boolean>(false);
 
   // Sync state with URL hash for intuitive navigation
   useEffect(() => {
@@ -41,32 +37,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Check backend health periodically
-  useEffect(() => {
-    let mounted = true;
-    const testHealth = async () => {
-      const res = await checkApiHealth();
-      if (mounted) {
-        setBackendOnline(res.online);
-      }
-    };
-
-    testHealth();
-    const interval = setInterval(testHealth, 25000);
-    return () => {
-      mounted = false;
-      clearInterval(interval);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col bg-stone-50 text-stone-900 font-sans selection:bg-emerald-200 selection:text-emerald-950">
       {/* Sticky Navigation Bar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={handleTabChange}
-        onOpenApiSettings={() => setIsApiModalOpen(true)}
-        backendOnline={backendOnline}
       />
 
       {/* Main Page View */}
@@ -75,11 +51,7 @@ export default function App() {
           <HomePage onNavigate={handleTabChange} />
         )}
         {activeTab === 'diagnose' && (
-          <DiagnosePage
-            onNavigateHome={() => handleTabChange('home')}
-            onOpenApiSettings={() => setIsApiModalOpen(true)}
-            backendOnline={backendOnline}
-          />
+          <DiagnosePage onNavigateHome={() => handleTabChange('home')} />
         )}
         {activeTab === 'diseases' && (
           <DiseasesPage onNavigateToDiagnose={() => handleTabChange('diagnose')} />
@@ -94,16 +66,6 @@ export default function App() {
 
       {/* Reusable Footer */}
       <Footer setActiveTab={handleTabChange} />
-
-      {/* Backend API Configuration & Health Modal */}
-      <ApiConfigModal
-        isOpen={isApiModalOpen}
-        onClose={() => setIsApiModalOpen(false)}
-        onConnectionChange={(online) => setBackendOnline(online)}
-        onLoadSchemaPreview={() => {
-          handleTabChange('diagnose');
-        }}
-      />
     </div>
   );
 }

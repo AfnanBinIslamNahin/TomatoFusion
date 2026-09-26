@@ -4,20 +4,16 @@
  */
 
 import React, { useState } from 'react';
-import { Leaf, Menu, X, ArrowUpRight, Settings2 } from 'lucide-react';
+import { Leaf, Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: 'home' | 'diagnose' | 'diseases' | 'how-it-works' | 'about';
   setActiveTab: (tab: 'home' | 'diagnose' | 'diseases' | 'how-it-works' | 'about') => void;
-  onOpenApiSettings?: () => void;
-  backendOnline?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
-  onOpenApiSettings,
-  backendOnline,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -81,23 +77,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Right Action Area */}
           <div className="hidden md:flex items-center gap-3">
-            {onOpenApiSettings && (
-              <button
-                type="button"
-                onClick={onOpenApiSettings}
-                title="Backend API Connection"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-lg border border-stone-200 bg-stone-50 text-stone-600 hover:bg-stone-100 hover:text-stone-900 transition-colors cursor-pointer"
-              >
-                <div
-                  className={`w-2 h-2 rounded-full ${
-                    backendOnline ? 'bg-emerald-500' : 'bg-amber-400'
-                  }`}
-                />
-                <Settings2 className="w-3.5 h-3.5" />
-                <span className="text-[11px] font-medium">API</span>
-              </button>
-            )}
-
             <button
               type="button"
               onClick={() => handleNavClick('diagnose')}
@@ -110,20 +89,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Mobile Menu Trigger */}
           <div className="flex md:hidden items-center gap-2">
-            {onOpenApiSettings && (
-              <button
-                type="button"
-                onClick={onOpenApiSettings}
-                aria-label="API Settings"
-                className="p-2 text-stone-600 hover:text-stone-900 rounded-lg border border-stone-200"
-              >
-                <div
-                  className={`w-2.5 h-2.5 rounded-full ${
-                    backendOnline ? 'bg-emerald-500' : 'bg-amber-400'
-                  }`}
-                />
-              </button>
-            )}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -166,19 +131,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Diagnose Leaf</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
-              {onOpenApiSettings && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenApiSettings();
-                  }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs text-stone-600 bg-stone-100 rounded-xl cursor-pointer"
-                >
-                  <Settings2 className="w-3.5 h-3.5" />
-                  <span>Configure API Connection</span>
-                </button>
-              )}
             </div>
           </div>
         </div>

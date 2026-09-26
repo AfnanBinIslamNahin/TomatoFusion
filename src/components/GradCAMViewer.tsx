@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Sparkles, Eye, Info } from 'lucide-react';
+import { Sparkles, Eye, Info, ImageOff } from 'lucide-react';
 
 interface GradCAMViewerProps {
   originalImageUrl: string;
@@ -66,7 +66,7 @@ export const GradCAMViewer: React.FC<GradCAMViewerProps> = ({
             <span>Grad-CAM Heatmap</span>
             <span className="text-emerald-700 font-semibold">AI Focus Area</span>
           </div>
-          <div className="relative aspect-4/3 rounded-2xl overflow-hidden border border-stone-200 bg-stone-900 flex items-center justify-center shadow-inner">
+          <div className="relative aspect-4/3 rounded-2xl overflow-hidden border border-stone-200 bg-stone-100 flex items-center justify-center p-4">
             {hasGradcam ? (
               <img
                 src={gradcamUrl}
@@ -74,20 +74,16 @@ export const GradCAMViewer: React.FC<GradCAMViewerProps> = ({
                 className="w-full h-full object-contain"
               />
             ) : (
-              /* High-quality simulated visual heatmap over original leaf */
-              <div className="relative w-full h-full">
-                {originalImageUrl && (
-                  <img
-                    src={originalImageUrl}
-                    alt="Original leaf base"
-                    className="w-full h-full object-contain filter brightness-90"
-                  />
-                )}
-                {/* Visual heatmap highlight overlay */}
-                <div className="absolute inset-0 bg-gradient-radial from-red-500/60 via-amber-400/40 to-transparent mix-blend-color-dodge pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 py-1.5 px-3 rounded-lg bg-black/75 backdrop-blur-xs text-white text-[11px] text-center">
-                  Attention Heatmap Overlay
+              <div className="flex flex-col items-center justify-center text-center p-6 space-y-2 text-stone-500">
+                <div className="w-12 h-12 rounded-xl bg-stone-200/80 flex items-center justify-center text-stone-400">
+                  <ImageOff className="w-6 h-6" />
                 </div>
+                <p className="text-xs sm:text-sm font-medium text-stone-600">
+                  Grad-CAM visualization is currently unavailable.
+                </p>
+                <p className="text-[11px] text-stone-400 max-w-xs">
+                  The visual attention heatmap will appear here when provided by the diagnosis model.
+                </p>
               </div>
             )}
           </div>
