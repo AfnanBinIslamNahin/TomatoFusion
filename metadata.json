@@ -1,0 +1,6 @@
+{
+  "name": "TomatoFusion",
+  "description": "AI-powered tomato leaf disease diagnosis web application for farmers and growers, providing instant disease detection, visual explanations, and practical plant-care guidance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
