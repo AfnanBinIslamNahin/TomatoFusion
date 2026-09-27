@@ -45,7 +45,7 @@ export const DiseaseInfoCard: React.FC<DiseaseInfoCardProps> = ({
         </div>
 
         {/* Real Leaf Photograph Container */}
-        <div className="w-[78px] h-[78px] sm:w-[96px] sm:h-[96px] shrink-0 rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs bg-stone-100 flex items-center justify-center">
+        <div className="w-[84px] h-[84px] sm:w-[116px] sm:h-[116px] shrink-0 rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs bg-stone-100 flex items-center justify-center">
           {!imageError && imageSrc ? (
             <img
               src={imageSrc}
@@ -55,7 +55,7 @@ export const DiseaseInfoCard: React.FC<DiseaseInfoCardProps> = ({
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center bg-stone-100 text-stone-400 p-2 text-center select-none">
-              <ImageIcon className="w-6 h-6 sm:w-7 sm:h-7 text-stone-400 stroke-[1.5]" />
+              <ImageIcon className="w-7 h-7 sm:w-8 sm:h-8 text-stone-400 stroke-[1.5]" />
               <span className="text-[10px] font-medium text-stone-400 mt-1 uppercase tracking-wider">
                 Photo
               </span>
