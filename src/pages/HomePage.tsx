@@ -35,7 +35,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="flex flex-wrap items-center gap-3">
                 {!logoError && (
                   <img
-                    src="/tomatofusion-logo.png"
+                    src="/TF.png"
                     alt="TomatoFusion"
                     onError={() => setLogoError(true)}
                     className="h-10 sm:h-12 w-auto object-contain block"

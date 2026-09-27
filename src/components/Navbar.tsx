@@ -45,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             {!logoError ? (
               <img
-                src="/tomatofusion-logo.png"
+                src="/TF.png"
                 alt="TomatoFusion"
                 onError={() => setLogoError(true)}
                 className="h-[38px] sm:h-[48px] w-auto max-w-[190px] sm:max-w-[220px] object-contain block transition-transform group-hover:scale-[1.02]"

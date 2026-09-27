@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
             <div className="flex items-center gap-3">
               {!logoError ? (
                 <img
-                  src="/tomatofusion-logo.png"
+                  src="/TF.png"
                   alt="TomatoFusion"
                   onError={() => setLogoError(true)}
                   className="w-[42px] h-[42px] object-contain rounded-lg shrink-0"

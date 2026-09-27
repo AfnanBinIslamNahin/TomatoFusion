@@ -88,7 +88,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigateToDiagnose }) =>
           <div className="flex flex-col items-center gap-3">
             {!logoError && (
               <img
-                src="/tomatofusion-logo.png"
+                src="/TF.png"
                 alt="TomatoFusion"
                 onError={() => setLogoError(true)}
                 className="h-12 sm:h-14 w-auto object-contain block"
