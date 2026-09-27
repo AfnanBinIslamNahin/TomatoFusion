@@ -21,12 +21,24 @@ interface AboutPageProps {
   onNavigateToDiagnose: () => void;
 }
 
+interface DeveloperProfile {
+  name: string;
+  title: string;
+  university: string;
+  role: string;
+  bio: string;
+  researchInterests: string[];
+  imageSrc: string;
+  githubUrl?: string;
+  linkedinUrl?: string;
+}
+
 /**
  * Developer Profile Configuration
  * Replace the placeholder strings with your actual information and URLs when ready.
  * If profile links are left empty or as placeholders, their buttons will remain hidden.
  */
-const DEVELOPER_PROFILE = {
+const DEVELOPER_PROFILE: DeveloperProfile = {
   name: 'AFNAN BIN ISLAM NAHIN',
   title: 'BSc in Computer Science and Engineering Student',
   university: 'AIUB',
@@ -60,6 +72,7 @@ function isValidLink(url: string | undefined): boolean {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigateToDiagnose }) => {
   const [imageError, setImageError] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const hasGithub = isValidLink(DEVELOPER_PROFILE.githubUrl);
   const hasLinkedin = isValidLink(DEVELOPER_PROFILE.linkedinUrl);
@@ -72,9 +85,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigateToDiagnose }) =>
       <section className="space-y-8">
         {/* Main Heading & Intro */}
         <div className="text-center max-w-2xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
-            <Leaf className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Agricultural AI Solution</span>
+          <div className="flex flex-col items-center gap-3">
+            {!logoError && (
+              <img
+                src="/tomatofusion-logo.png"
+                alt="TomatoFusion"
+                onError={() => setLogoError(true)}
+                className="h-12 sm:h-14 w-auto object-contain block"
+              />
+            )}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
+              <Leaf className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Agricultural AI Solution</span>
+            </div>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-950 font-sans tracking-tight">
             About TomatoFusion

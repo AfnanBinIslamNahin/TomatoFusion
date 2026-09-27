@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
   Sparkles,
@@ -22,6 +22,8 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
       {/* HERO SECTION */}
@@ -30,9 +32,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Hero Text */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
-                <Leaf className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Smart Crop Health & Leaf Pathology</span>
+              <div className="flex flex-wrap items-center gap-3">
+                {!logoError && (
+                  <img
+                    src="/tomatofusion-logo.png"
+                    alt="TomatoFusion"
+                    onError={() => setLogoError(true)}
+                    className="h-10 sm:h-12 w-auto object-contain block"
+                  />
+                )}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
+                  <Leaf className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Smart Crop Health & Leaf Pathology</span>
+                </div>
               </div>
 
               <div className="space-y-4">

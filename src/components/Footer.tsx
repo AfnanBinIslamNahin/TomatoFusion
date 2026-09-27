@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Leaf, ShieldCheck, Heart } from 'lucide-react';
 
 interface FooterProps {
@@ -11,6 +11,8 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
+  const [logoError, setLogoError] = useState(false);
+
   const handleNav = (tab: 'home' | 'diagnose' | 'diseases' | 'how-it-works' | 'about') => {
     setActiveTab(tab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -23,9 +25,18 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
           {/* Brand Column */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-sm">
-                <Leaf className="w-5 h-5" />
-              </div>
+              {!logoError ? (
+                <img
+                  src="/tomatofusion-logo.png"
+                  alt="TomatoFusion"
+                  onError={() => setLogoError(true)}
+                  className="w-[42px] h-[42px] object-contain rounded-lg shrink-0"
+                />
+              ) : (
+                <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-sm shrink-0">
+                  <Leaf className="w-5 h-5" />
+                </div>
+              )}
               <span className="font-extrabold text-2xl tracking-tight text-white">
                 Tomato<span className="text-emerald-400">Fusion</span>
               </span>

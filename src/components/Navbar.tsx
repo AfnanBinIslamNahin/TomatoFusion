@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const navItems: Array<{ id: 'home' | 'diagnose' | 'diseases' | 'how-it-works' | 'about'; label: string }> = [
     { id: 'home', label: 'Home' },
@@ -35,23 +36,30 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="sticky top-0 z-40 w-full border-b border-stone-200/80 bg-white/95 backdrop-blur-md transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo & Brand */}
+          {/* Official Logo / Brand */}
           <button
             type="button"
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg p-1"
+            className="flex items-center group text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg p-1"
+            aria-label="TomatoFusion Home"
           >
-            <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-sm shadow-emerald-900/10 group-hover:bg-emerald-700 transition-colors">
-              <Leaf className="w-5 h-5 text-emerald-100" />
-            </div>
-            <div>
-              <span className="font-extrabold text-xl tracking-tight text-emerald-950 font-sans">
-                Tomato<span className="text-emerald-600">Fusion</span>
-              </span>
-              <p className="text-[11px] text-stone-500 hidden sm:block">
-                Smart Leaf Disease Diagnosis
-              </p>
-            </div>
+            {!logoError ? (
+              <img
+                src="/tomatofusion-logo.png"
+                alt="TomatoFusion"
+                onError={() => setLogoError(true)}
+                className="h-[38px] sm:h-[48px] w-auto max-w-[190px] sm:max-w-[220px] object-contain block transition-transform group-hover:scale-[1.02]"
+              />
+            ) : (
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-sm shadow-emerald-900/10 group-hover:bg-emerald-700 transition-colors">
+                  <Leaf className="w-5 h-5 text-emerald-100" />
+                </div>
+                <span className="font-extrabold text-xl tracking-tight text-emerald-950 font-sans">
+                  Tomato<span className="text-emerald-600">Fusion</span>
+                </span>
+              </div>
+            )}
           </button>
 
           {/* Desktop Navigation Links */}
