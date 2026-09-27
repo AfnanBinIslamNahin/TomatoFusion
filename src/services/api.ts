@@ -4,6 +4,7 @@
  */
 
 import { DiagnosisResponse } from '../types/diagnosis';
+import { toPercentage } from '../utils/format';
 
 export const API_BASE_URL = (
   (import.meta.env.VITE_API_BASE_URL as string) || ''
@@ -75,13 +76,17 @@ function validateAndNormalizeResponse(data: unknown): DiagnosisResponse {
 
   return {
     prediction: d.prediction,
-    confidence: typeof d.confidence === 'number' ? Number(d.confidence.toFixed(2)) : 0,
+    confidence: toPercentage(d.confidence),
     probabilities: {
-      'Early Blight': d.probabilities?.['Early Blight'] ?? 0,
-      'Healthy': d.probabilities?.['Healthy'] ?? 0,
-      'Late Blight': d.probabilities?.['Late Blight'] ?? 0,
-      'Septoria Leaf Spot': d.probabilities?.['Septoria Leaf Spot'] ?? 0,
-      ...(d.probabilities || {}),
+      'Early Blight': toPercentage(d.probabilities?.['Early Blight']),
+      'Healthy': toPercentage(d.probabilities?.['Healthy']),
+      'Late Blight': toPercentage(d.probabilities?.['Late Blight']),
+      'Septoria Leaf Spot': toPercentage(d.probabilities?.['Septoria Leaf Spot']),
+      ...(d.probabilities
+        ? Object.fromEntries(
+            Object.entries(d.probabilities).map(([k, v]) => [k, toPercentage(v)])
+          )
+        : {}),
     },
     gradcam_url: typeof d.gradcam_url === 'string' ? d.gradcam_url : '',
     description: d.description || 'Diagnosis details received from the system.',

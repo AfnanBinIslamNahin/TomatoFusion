@@ -13,7 +13,12 @@ from fastapi import FastAPI, File, HTTPException, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image, UnidentifiedImageError
 
-from inference import are_models_loaded, get_model_status, load_models, predict_ensemble
+from .inference import (
+    are_models_loaded,
+    get_model_status,
+    load_models,
+    predict_ensemble,
+)
 
 # Logging setup
 logging.basicConfig(
@@ -50,12 +55,15 @@ app = FastAPI(
 )
 
 # CORS configuration
-raw_origins = os.environ.get("CORS_ORIGINS", "*")
+raw_origins = os.environ.get(
+    "CORS_ORIGINS",
+    "http://localhost:3000"
+)
 origins: List[str] = [orig.strip() for orig in raw_origins.split(",") if orig.strip()]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins if origins else ["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -174,4 +182,4 @@ if __name__ == "__main__":
 
     host = os.environ.get("HOST", "0.0.0.0")
     port = int(os.environ.get("PORT", "8000"))
-    uvicorn.run("main:app", host=host, port=port, reload=True)
+    uvicorn.run("backend.main:app", host=host, port=port, reload=True)

@@ -74,7 +74,7 @@ def generate_gradcam_heatmap(
         # Attempt direct gradient sub-model construction
         try:
             grad_model = tf.keras.models.Model(
-                inputs=[model.inputs],
+                inputs=model.inputs,
                 outputs=[last_conv.output, model.output],
             )
             with tf.GradientTape() as tape:
@@ -98,7 +98,7 @@ def generate_gradcam_heatmap(
                 return None
 
             sub_grad_model = tf.keras.models.Model(
-                inputs=[sub_model.inputs],
+                inputs=sub_model.inputs,
                 outputs=[last_conv.output, sub_model.output],
             )
 

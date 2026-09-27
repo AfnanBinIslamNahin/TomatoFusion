@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { ClassProbabilities } from '../types/diagnosis';
+import { toPercentage } from '../utils/format';
 
 interface ProbabilityBarProps {
   probabilities: ClassProbabilities;
@@ -59,8 +60,8 @@ export const ProbabilityBar: React.FC<ProbabilityBarProps> = ({
       <div className="space-y-3">
         {CLASS_KEYS.map((key) => {
           const rawVal = probabilities[key] ?? 0;
-          const percentage = Math.min(100, Math.max(0, Number(rawVal)));
-          const formatted = percentage.toFixed(1);
+          const percentage = toPercentage(rawVal);
+          const formatted = percentage.toFixed(2);
           const isTop = topPrediction === key;
           const config = CLASS_CONFIG[key] || {
             label: key,

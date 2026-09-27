@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { DiagnosisResponse } from '../types/diagnosis';
+import { toPercentage } from '../utils/format';
 import { ProbabilityBar } from './ProbabilityBar';
 import { GradCAMViewer } from './GradCAMViewer';
 import { SafetyNotice } from './SafetyNotice';
@@ -112,7 +113,7 @@ export const DiagnosisResult: React.FC<DiagnosisResultProps> = ({
               <div className="pt-2 flex items-center justify-between border-t border-stone-200 text-xs">
                 <span className="text-stone-500">Confidence:</span>
                 <span className="font-mono font-extrabold text-base text-emerald-700">
-                  {result.confidence}%
+                  {toPercentage(result.confidence)}%
                 </span>
               </div>
             </div>

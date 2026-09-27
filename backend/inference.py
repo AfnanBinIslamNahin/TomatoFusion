@@ -4,15 +4,15 @@ Loads the three fine-tuned Keras models, handles architecture-specific preproces
 performs equal-weight soft voting ensemble, and generates the diagnosis response.
 """
 
-import os
 import logging
+import os
 from typing import Dict, Any, Tuple
 import numpy as np
 from PIL import Image
 import tensorflow as tf
 
-from disease_info import get_disease_info
-from gradcam import generate_gradcam_data_url
+from .disease_info import get_disease_info
+from .gradcam import generate_gradcam_data_url
 
 logger = logging.getLogger("tomatofusion.inference")
 
