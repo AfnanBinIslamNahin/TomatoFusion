@@ -42,4 +42,5 @@ export interface DiseaseDetail {
   preventionTips: string[];
   bannerColor: string;
   badgeColor: string;
+  image?: string;
 }

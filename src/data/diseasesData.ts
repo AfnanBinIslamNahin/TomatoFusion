@@ -29,6 +29,7 @@ export const DISEASES_DATA: DiseaseDetail[] = [
     ],
     bannerColor: 'from-amber-600/10 to-emerald-600/10',
     badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+    image: '/disease-images/early-blight.jpg',
   },
   {
     id: 'late-blight',
@@ -53,6 +54,7 @@ export const DISEASES_DATA: DiseaseDetail[] = [
     ],
     bannerColor: 'from-rose-600/10 to-amber-600/10',
     badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
+    image: '/disease-images/late-blight.jpg',
   },
   {
     id: 'septoria-leaf-spot',
@@ -77,6 +79,7 @@ export const DISEASES_DATA: DiseaseDetail[] = [
     ],
     bannerColor: 'from-indigo-600/10 to-emerald-600/10',
     badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+    image: '/disease-images/septoria-leaf-spot.jpg',
   },
   {
     id: 'healthy',
@@ -100,5 +103,6 @@ export const DISEASES_DATA: DiseaseDetail[] = [
     ],
     bannerColor: 'from-emerald-600/15 to-teal-600/10',
     badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    image: '/disease-images/healthy.jpg',
   },
 ];
