@@ -15,6 +15,7 @@ import {
   Sparkles,
   Github,
   Linkedin,
+  Microscope,
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -40,9 +41,9 @@ interface DeveloperProfile {
  */
 const DEVELOPER_PROFILE: DeveloperProfile = {
   name: 'AFNAN BIN ISLAM NAHIN',
-  title: 'BSc in Computer Science and Engineering Student',
+  title: 'BSc in Computer Science and Engineer',
   university: 'AIUB',
-  role: 'Creator & Researcher of TomatoFusion',
+  role: 'Developer & Researcher of TomatoFusion',
   bio: 'Afnan Bin Islam NAHIN is a Computer Science and Engineering student with an interest in Artificial Intelligence, Machine Learning, Deep Learning, and Computer Vision. His work focuses on developing practical AI-based systems that can solve real-world problems. TomatoFusion was developed as part of his work on explainable deep learning for tomato leaf disease classification and intelligent diagnosis support.',
   researchInterests: [
     'Artificial Intelligence',
@@ -119,6 +120,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigateToDiagnose }) =>
           </div>
           <p className="text-stone-700 text-base sm:text-lg leading-relaxed font-normal">
             Our goal is to make tomato leaf disease identification faster, easier, and more accessible while providing useful visual explanations and practical decision-support information.
+          </p>
+        </div>
+
+        {/* Research Background Card */}
+        <div className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8 md:p-10 shadow-xs space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-2xl bg-emerald-100 text-emerald-800">
+              <Microscope className="w-5 h-5 text-emerald-700" />
+            </div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-stone-900 font-sans">
+              Research Background
+            </h2>
+          </div>
+          <p className="text-stone-700 text-base sm:text-lg leading-relaxed font-normal">
+            TomatoFusion was developed using a completely self-collected tomato leaf image dataset gathered by our team from real agricultural fields in Bangladesh. No public benchmark dataset images were used for training. The images were carefully reviewed and quality-filtered before model development, helping the system better reflect real-world field conditions and natural variations in tomato leaves.
           </p>
         </div>
 
